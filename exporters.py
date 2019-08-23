@@ -18,7 +18,6 @@ class SqliteItemExporter(BaseItemExporter):
         self.created_tables = []
 
     def export_item(self, item):
-        print(item.__class__)
         item_class_name = type(item).__name__
 
         if item_class_name not in self.created_tables:
@@ -37,8 +36,7 @@ class SqliteItemExporter(BaseItemExporter):
             ", ".join(field_list),
             ", ".join(["?" for f in field_list]),
         )
-        print("SQL: ", sql)
-        print("VLIST", value_list)
+        # print("sql: ", sql)
         self.conn.execute(sql, value_list)
         self.conn.commit()
 
@@ -67,7 +65,7 @@ class SqliteItemExporter(BaseItemExporter):
 
         sql += "(%s)" % ", ".join(column_define)
 
-        print("sql: %s" % sql)
+        # print("sql: %s" % sql)
         self.conn.execute(sql)
         self.conn.commit()
 
